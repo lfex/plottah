@@ -54,8 +54,10 @@
 (defun handle_call
   (('stop _from state)
     `#(stop shutdown ok ,state))
-  ((`#(echo ,msg) _from state)
+  ((`#(cmd echo ,msg) _from state)
     `#(reply ,msg ,state))
+  ((`#(cmd ping) _from state)
+    `#(reply pong ,state))
   ((message _from state)
     `#(reply ,(unknown-command) ,state)))
 

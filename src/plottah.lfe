@@ -6,8 +6,10 @@
   ;; Plottah API
   ;; Debug
   (export
+   (echo 1)
    (pid 0)
-   (echo 1)))
+   (ping 0)
+   (state 0)))
 
 ;; Constants
 
@@ -23,8 +25,14 @@
 
 ;; Debug
 
+(defun echo (msg)
+  (gen_server:call (SERVER) `#(cmd echo ,msg)))
+
 (defun pid ()
   (erlang:whereis (SERVER)))
 
-(defun echo (msg)
-  (gen_server:call (SERVER) `#(echo ,msg)))
+(defun ping ()
+  (gen_server:call (SERVER) `#(cmd ping)))
+
+(defun state ()
+  (gen_server:call (SERVER) `#(cmd state)))
