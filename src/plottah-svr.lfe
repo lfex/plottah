@@ -22,8 +22,6 @@
 (defun SERVER () (MODULE))
 (defun initial-state () #m())
 (defun genserver-opts () '())
-(defun gnuplot-opts () '())
-(defun unknown-command () #(error "Unknown command."))
 
 ;;; -------------------------
 ;;; gen_server implementation
@@ -45,11 +43,13 @@
 (defun init (state)
   (log-debug "Initialising gnuplot server ...")
   (erlang:process_flag 'trap_exit 'true)
-  (let ((`#(ok ,pid ,os-pid) (exec:run_link "gnuplot" (gnuplot-opts))))
+  (let ((`#(ok ,pid ,os-pid) (exec:run_link "gnuplot" (erlexec-opts (self)))))
     `#(ok ,(maps:merge state `#m(pid ,pid os-pid ,os-pid)))))
 
-(defun handle_cast (_msg state)
-  `#(noreply ,state))
+(defun handle_cast
+  ((msg state)
+    (unknown-command msg)
+    `#(noreply ,state)))
 
 (defun handle_call
   (('stop _from state)
@@ -58,16 +58,25 @@
     `#(reply ,msg ,state))
   ((`#(cmd ping) _from state)
     `#(reply pong ,state))
-  ((message _from state)
-    `#(reply ,(unknown-command) ,state)))
+  ((`#(cmd state) _from state)
+    `#(reply ,state ,state))
+  ((`#(cmd gplot ,cmd) _from (= `#m(os-pid ,os-pid) state))
+    `#(reply ,(exec:send os-pid (list_to_binary (++ cmd "\n"))) ,state))
+  ((msg _from state)
+    `#(reply ,(unknown-command msg) ,state)))
 
 (defun handle_info
+  ;; Output from gnuplot
+  ((`#(stderr ,_pid ,msg) state)
+   (io:format "~s~n" (list (binary_to_list msg)))
+   `#(noreply ,state))
   ((`#(EXIT ,_from normal) state)
    `#(noreply ,state))
   ((`#(EXIT ,pid ,reason) state)
    (io:format "Process ~p exited! (Reason: ~p)~n" `(,pid ,reason))
    `#(noreply ,state))
-  ((_msg state)
+  ((msg state)
+   (unhandled-info msg)
    `#(noreply ,state)))
 
 (defun terminate (_reason _state)
@@ -75,3 +84,24 @@
 
 (defun code_change (_old-version state _extra)
   `#(ok ,state))
+
+;;; -----------------------
+;;; private functions
+;;; -----------------------
+
+(defun erlexec-opts (mgr-pid)
+  `(stdin
+    pty
+    #(stdout ,mgr-pid)
+    #(stderr ,mgr-pid)
+    monitor))
+
+(defun unknown-command (data)
+  (let ((msg (io_lib:format "Unknown command: ~p" `(,data))))
+    (log:error msg)
+    #(error mag)))
+
+(defun unhandled-info (data)
+  (let ((msg (io_lib:format "Unhandled info: ~p" `(,data))))
+    (log:error msg)
+    #(error mag)))

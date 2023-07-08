@@ -30,13 +30,13 @@ This project depends upon gnuplot being installed on the system; development was
 rebar3 compile
 ```
 
-# Start the Project REPL [&#x219F;](#table-of-contents)
+## Start the Project REPL [&#x219F;](#table-of-contents)
 
 ```shell
-rebar3 lfe repl
+make repl
 ```
 
-# Tests [&#x219F;](#table-of-contents)
+## Tests [&#x219F;](#table-of-contents)
 
 ```shell
 rebar3 as test lfe test
@@ -44,7 +44,17 @@ rebar3 as test lfe test
 
 ## Usage [&#x219F;](#table-of-contents)
 
-TBD
+Be sure you've compile the project using the instructions above, first!
+
+Then start the REPL, per the above.
+
+From the REPL, start plottah:
+
+```lisp
+(plottah:start)
+```
+
+This will run the `gnuplot` shell in an OS process.
 
 ## License [&#x219F;](#table-of-contents)
 

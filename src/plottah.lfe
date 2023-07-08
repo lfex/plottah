@@ -9,6 +9,7 @@
    (echo 1)
    (pid 0)
    (ping 0)
+   (raw 1)
    (state 0)))
 
 ;; Constants
@@ -36,3 +37,6 @@
 
 (defun state ()
   (gen_server:call (SERVER) `#(cmd state)))
+
+(defun raw (raw-cmd)
+  (gen_server:call (SERVER) `#(cmd gplot ,raw-cmd)))
