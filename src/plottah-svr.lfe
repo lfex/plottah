@@ -13,13 +13,16 @@
    (terminate 2)
    (code_change 3)))
 
+(include-lib "logjam/include/logjam.hrl")
+
 ;;; ----------------
 ;;; config functions
 ;;; ----------------
 
 (defun SERVER () (MODULE))
-(defun initial-state () '#())
+(defun initial-state () #m())
 (defun genserver-opts () '())
+(defun gnuplot-opts () '())
 (defun unknown-command () #(error "Unknown command."))
 
 ;;; -------------------------
@@ -40,7 +43,10 @@
 ;;; -----------------------
 
 (defun init (state)
-  `#(ok ,state))
+  (log-debug "Initialising gnuplot server ...")
+  (erlang:process_flag 'trap_exit 'true)
+  (let ((`#(ok ,pid ,os-pid) (exec:run_link "gnuplot" (gnuplot-opts))))
+    `#(ok ,(maps:merge state `#m(pid ,pid os-pid ,os-pid)))))
 
 (defun handle_cast (_msg state)
   `#(noreply ,state))

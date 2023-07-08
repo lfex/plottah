@@ -1,11 +1,12 @@
 {application, plottah, [
     {description, "An Erlang/LFE gnuplot process server"},
-    {vsn, git},
+    {vsn, "0.1.0"},
     {registered, []},
     {mod, {'plottah-app', []}},
     {applications, [
         kernel,
-        stdlib
+        stdlib,
+        erlexec
     ]},
     {env,[]},
     {modules, []},

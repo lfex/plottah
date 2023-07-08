@@ -27,7 +27,7 @@ TBD
 This project depends upon gnuplot being installed on the system; development was done against the gnuplot installed by Homebrew on a mac.
 
 ```shell
-rebar3 lfe compile
+rebar3 compile
 ```
 
 # Start the Project REPL [&#x219F;](#table-of-contents)

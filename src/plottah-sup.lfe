@@ -14,6 +14,7 @@
 
 (defun SERVER () (MODULE))
 (defun supervisor-opts () '())
+(defun child-opts () '())
 (defun sup-flags ()
   `#M(strategy one_for_one
       intensity 3
@@ -36,7 +37,7 @@
 ;;; -----------------------
 
 (defun init (_args)
-  `#(ok #(,(sup-flags) (,(child 'plottah 'start_link '())))))
+  `#(ok #(,(sup-flags) (,(child 'plottah-svr 'start_link (child-opts))))))
 
 ;;; -----------------
 ;;; private functions
