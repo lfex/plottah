@@ -9,6 +9,47 @@
 
 *An Erlang/LFE gnuplot process server*
 
+##### Table of Contents
+
+* [About](#about-)
+* [Build](#build-)
+* [Start the Project REPL](#start-the-repl-)
+* [Tests](#tests-)
+* [Usage](#usage-)
+* [License](#license-)
+
+## About [&#x219F;](#table-of-contents)
+
+TBD
+
+## Build [&#x219F;](#table-of-contents)
+
+```shell
+rebar3 lfe compile
+```
+
+# Start the Project REPL [&#x219F;](#table-of-contents)
+
+```shell
+rebar3 lfe repl
+```
+
+# Tests [&#x219F;](#table-of-contents)
+
+```shell
+rebar3 as test lfe test
+```
+
+## Usage [&#x219F;](#table-of-contents)
+
+TBD
+
+## License [&#x219F;](#table-of-contents)
+
+Apache License, Version 2.0
+
+Copyright © 2023, Duncan McGreggor <oubiwann@gmail.com>.
+
 [//]: ---Named-Links---
 
 [logo]: priv/images/plottah-x250.jpg
