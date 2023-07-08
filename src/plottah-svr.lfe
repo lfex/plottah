@@ -98,10 +98,10 @@
 
 (defun unknown-command (data)
   (let ((msg (io_lib:format "Unknown command: ~p" `(,data))))
-    (log:error msg)
+    (log-error msg)
     #(error mag)))
 
 (defun unhandled-info (data)
   (let ((msg (io_lib:format "Unhandled info: ~p" `(,data))))
-    (log:error msg)
+    (log-warn msg)
     #(error mag)))
