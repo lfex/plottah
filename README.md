@@ -24,6 +24,8 @@ TBD
 
 ## Build [&#x219F;](#table-of-contents)
 
+This project depends upon gnuplot being installed on the system; development was done against the gnuplot installed by Homebrew on a mac.
+
 ```shell
 rebar3 lfe compile
 ```

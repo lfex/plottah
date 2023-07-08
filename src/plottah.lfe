@@ -1,80 +1,32 @@
 (defmodule plottah
   (behaviour gen_server)
-  ;; gen_server implementation
+  ;; OTP API
   (export
    (start_link 0)
    (stop 0))
-  ;; callback implementation
+  ;; Convenience wrappers
   (export
-   (init 1)
-   (handle_call 3)
-   (handle_cast 2)
-   (handle_info 2)
-   (terminate 2)
-   (code_change 3))
-  ;; server API
+    (start 0))
+  ;; Plottah API
+  ;; Debug
   (export
    (pid 0)
    (echo 1)))
 
-;;; ----------------
-;;; config functions
-;;; ----------------
+;; Constants
 
-(defun SERVER () (MODULE))
-(defun initial-state () '#())
-(defun genserver-opts () '())
-(defun unknown-command () #(error "Unknown command."))
+(defun SERVER () 'plottah-svr)
 
-;;; -------------------------
-;;; gen_server implementation
-;;; -------------------------
+;; OTP API
+(defun start_link () (plottah-svr:start_link))
+(defun stop () (plottah-svr:stop))
 
-(defun start_link ()
-  (gen_server:start_link `#(local ,(SERVER))
-                         (MODULE)
-                         (initial-state)
-                         (genserver-opts)))
+;; Convenience wrappers
+(defun start () (plottah-svr:start_link))
 
-(defun stop ()
-  (gen_server:call (SERVER) 'stop))
+;; Plottah API
 
-;;; -----------------------
-;;; callback implementation
-;;; -----------------------
-
-(defun init (state)
-  `#(ok ,state))
-
-(defun handle_cast (_msg state)
-  `#(noreply ,state))
-
-(defun handle_call
-  (('stop _from state)
-    `#(stop shutdown ok ,state))
-  ((`#(echo ,msg) _from state)
-    `#(reply ,msg ,state))
-  ((message _from state)
-    `#(reply ,(unknown-command) ,state)))
-
-(defun handle_info
-  ((`#(EXIT ,_from normal) state)
-   `#(noreply ,state))
-  ((`#(EXIT ,pid ,reason) state)
-   (io:format "Process ~p exited! (Reason: ~p)~n" `(,pid ,reason))
-   `#(noreply ,state))
-  ((_msg state)
-   `#(noreply ,state)))
-
-(defun terminate (_reason _state)
-  'ok)
-
-(defun code_change (_old-version state _extra)
-  `#(ok ,state))
-
-;;; --------------
-;;; our server API
-;;; --------------
+;; Debug
 
 (defun pid ()
   (erlang:whereis (SERVER)))

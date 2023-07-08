@@ -17,6 +17,7 @@ deps
 rebar3.crashdump
 _build/
 _checkouts/
+rebar.lock
 
 # misc
 priv/images/drafts/*
