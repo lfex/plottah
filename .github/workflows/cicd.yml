@@ -27,7 +27,7 @@ jobs:
         otp-version: ${{ matrix.otp_version }}
         rebar3-version: '3.22'
     - name: Install Deps
-      run: sudo apt-get install -y gnuplot
+      run: sudo apt-get update && sudo apt-get install -y gnuplot
     - name: Compile
       run: rebar3 compile
     - name: Xref Checks
@@ -58,7 +58,7 @@ jobs:
         otp-version: ${{ matrix.otp_version }}
         rebar3-version: '3.15'
     - name: Install Deps
-      run: sudo apt-get install -y gnuplot
+      run: sudo apt-get update && sudo apt-get install -y gnuplot
     - name: Compile
       run: rebar3 compile
     - name: Xref Checks
