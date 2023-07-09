@@ -23,7 +23,7 @@
 
 This library aims to provide a means for programmers of the BEAM VM to use gnuplot in their native language. To accomplish this, it runs `gnuplot` in shell mode in a managed OS process. The `erlexec` library is used for two-way communications (via `stdin` and combined `stdout`/`stderr`).
 
-This library is in the early stages of development, so only a few functions are provided in the API. See the "Usage" section below for example usage (also the `./examples` directory).
+This library is in the early stages of development, so to-date only a few functions are provided in the API. See the "Usage" section below for example usage (also the `./examples` directory). For now, the API is a very thin layer over the gnuplot shell, but in the future a DSL may be provided for a more functional programming language experience.
 
 ## Build [&#x219F;](#table-of-contents)
 
@@ -33,7 +33,7 @@ This project depends upon:
 * `rebar3`
 * `gnuplot` being installed on the system
 
-Note that development was done against the gnuplot installed by Homebrew on a macos.
+Note that development was done against the gnuplot installed by Homebrew on macos.
 
 With the dependencies in place, the library may be compiled with the following:
 
@@ -79,9 +79,9 @@ rebar3 as examples lfe run -- 3d-hidden
 
 ## Usage [&#x219F;](#table-of-contents)
 
-Be sure you've compile the project using the instructions above, first!
+First, be sure you've compiled the project using the instructions above!
 
-Then start the REPL, per the above (including starting up `plottah`). You can then run code like the following in the REPL (example taken from [here](https://gnuplot.sourceforge.net/demo_5.2/hidden.3.gnu)):
+Then start the REPL (see above), including starting up `plottah`. You can then run code like the following in the REPL (example taken from [here](https://gnuplot.sourceforge.net/demo_5.2/hidden.3.gnu)):
 
 ```lisp
 (defun options ()
