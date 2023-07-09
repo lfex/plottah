@@ -5,6 +5,7 @@
     (stop 0))
   ;; Plottah API
   (export
+    (plot 1) (plot 2)
     (set-opt 1)
     (set-opts 1)
     (splot 1) (splot 2))
@@ -23,12 +24,18 @@
 (defun APP () 'plottah)
 (defun SERVER () 'plottah-svr)
 
-
 ;; Convenience wrappers
 (defun start () (application:ensure_all_started (APP)))
 (defun stop () (application:stop (APP)))
 
 ;; Plottah API
+
+(defun plot (args)
+  (plot args #m()))
+
+(defun plot (args opts)
+  (set-opts opts)
+  (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'plot args))))
 
 (defun set-opts
  ((opts) (when (is_map opts))
