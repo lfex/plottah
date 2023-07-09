@@ -16,12 +16,12 @@
      yrange "[ 0.00000 : 1.0 ] noreverse nowriteback"
      format "y ''"
      unset ytics
-     xrange "[ 35 : 710 ] noreverse writeback"
+     xrange "[ 20 : 460 ] noreverse writeback"
      xlabel "'Frequency (Hz)'"
      xtic "out"
-     xtics "25 nomirror"
+     xtics "20 nomirror"
      grid ""
-     ))
+     key "on outside"))
 
 (defun plot ()
   "'examples/room-modes.csv' u 2:1 title 'Length' w boxes lc rgb 'blue', '' u 3:1 title 'Width' w boxes lc rgb 'green', '' u 4:1 title 'Height' w boxes lc rgb 'red'")
