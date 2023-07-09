@@ -15,6 +15,7 @@
 * [Build](#build-)
 * [Start the Project REPL](#start-the-repl-)
 * [Tests](#tests-)
+* [Examples](#examples-)
 * [Usage](#usage-)
 * [License](#license-)
 
@@ -39,7 +40,13 @@ make repl
 ## Tests [&#x219F;](#table-of-contents)
 
 ```shell
-rebar3 as test lfe test
+rebar3 as test check
+```
+
+## Examples [&#x219F;](#table-of-contents)
+
+```shell
+rebar3 as examples run
 ```
 
 ## Usage [&#x219F;](#table-of-contents)
