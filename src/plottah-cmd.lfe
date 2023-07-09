@@ -2,7 +2,6 @@
   (export
     (join 2)))
 
-(defun space () 32)
 (defun dbl-quote () 34)
 
 (defun join
