@@ -1,7 +1,8 @@
 #! /usr/bin/env lfescript
 
 (defun list-examples ()
-  '(3d-hidden
+  '(3d-heatmap
+    3d-hidden
     histogram))
 
 (defun run-example
