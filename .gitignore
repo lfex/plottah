@@ -20,4 +20,5 @@ _checkouts/
 rebar.lock
 
 # misc
-priv/images/drafts/*
+/priv/images/drafts/*
+/doc/*

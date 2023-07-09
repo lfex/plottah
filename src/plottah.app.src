@@ -11,6 +11,13 @@
     {env,[]},
     {modules, []},
 
-    {licenses, ["Apache 2.0"]},
-    {links, []}
+    %% Package metadata:
+    {maintainers, ["Duncan McGreggor"]},
+    {licenses, ["Apache-2"]},
+    {links, [
+        {"GitHub", "https://github.com/lfex/plottah"},
+        {"Hex", "https://hex.pm/packages/plottah"}
+    ]},
+    {exclude_files, ["priv/html/*", "priv/images/*"]},
+    {include_files, ["examples/*", "scripts/*", "test/*"]}
  ]}.
