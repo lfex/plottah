@@ -3,13 +3,16 @@
 (defun list-examples ()
   '(3d-heatmap
     3d-hidden
-    histogram))
+    histogram
+    room-modes))
 
 (defun run-example
  ((#"3d-hidden")
   (plottah:splot (3d-hidden:eqn) (3d-hidden:opts)))
  ((#"histogram")
-  (plottah:plot (histogram:plot) (histogram:opts))))
+  (plottah:plot (histogram:plot) (histogram:opts)))
+ ((#"room-modes")
+  (plottah:plot (room-modes:plot) (room-modes:opts))))
 
 (defun main
  (('())
