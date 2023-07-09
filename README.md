@@ -45,8 +45,16 @@ rebar3 as test check
 
 ## Examples [&#x219F;](#table-of-contents)
 
+Show the list of examples:
+
 ```shell
-rebar3 as examples run
+rebar3 as examples list
+```
+
+Run a specific example:
+
+```shell
+rebar3 as examples lfe run -- 3d-hidden
 ```
 
 ## Usage [&#x219F;](#table-of-contents)
