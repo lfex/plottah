@@ -106,6 +106,10 @@ Then start the REPL (see above), including starting up `plottah`. You can then r
 (plottah:splot (eqn) (options))
 ```
 
+With that last, a window should pop up showing the following:
+
+[![3D graph screenshot][screenshot]][screenshot]
+
 ## License [&#x219F;](#table-of-contents)
 
 Apache License, Version 2.0
@@ -116,6 +120,7 @@ Copyright © 2023, Duncan McGreggor <oubiwann@gmail.com>.
 
 [logo]: priv/images/plottah-x250.jpg
 [logo-large]: priv/images/plottah-x1600.jpg
+[screenshot]: priv/images/screenshot.png
 [gh-actions-badge]: https://github.com/lfex/plottah/workflows/ci%2Fcd/badge.svg
 [gh-actions]: https://github.com/lfex/plottah/actions
 [lfe]: https://github.com/lfe/lfe
