@@ -13,7 +13,7 @@
 
 * [About](#about-)
 * [Build](#build-)
-* [Start the Project REPL](#start-the-repl-)
+* [REPL](#repl-)
 * [Tests](#tests-)
 * [Examples](#examples-)
 * [Usage](#usage-)
@@ -21,21 +21,41 @@
 
 ## About [&#x219F;](#table-of-contents)
 
-TBD
+This library aims to provide a means for programmers of the BEAM VM to use gnuplot in their native language. To accomplish this, it runs `gnuplot` in shell mode in a managed OS process. The `erlexec` library is used for two-way communications (via `stdin` and combined `stdout`/`stderr`).
+
+This library is in the early stages of development, so only a few functions are provided in the API. See the "Usage" section below for example usage (also the `./examples` directory).
 
 ## Build [&#x219F;](#table-of-contents)
 
-This project depends upon gnuplot being installed on the system; development was done against the gnuplot installed by Homebrew on a mac.
+This project depends upon:
+
+* Erlang 21+
+* `rebar3`
+* `gnuplot` being installed on the system
+
+Note that development was done against the gnuplot installed by Homebrew on a macos.
+
+With the dependencies in place, the library may be compiled with the following:
 
 ```shell
 rebar3 compile
 ```
 
-## Start the Project REPL [&#x219F;](#table-of-contents)
+## REPL [&#x219F;](#table-of-contents)
+
+To start an interactive session in the LFE REPL:
 
 ```shell
 make repl
 ```
+
+and then:
+
+```lisp
+(plottah:start)
+```
+
+This runs the `gnuplot` shell in an OS process and allows for two-way communication. See below on how to communicate with the process.
 
 ## Tests [&#x219F;](#table-of-contents)
 
@@ -61,15 +81,30 @@ rebar3 as examples lfe run -- 3d-hidden
 
 Be sure you've compile the project using the instructions above, first!
 
-Then start the REPL, per the above.
-
-From the REPL, start plottah:
+Then start the REPL, per the above (including starting up `plottah`). You can then run code like the following in the REPL (example taken from [here](https://gnuplot.sourceforge.net/demo_5.2/hidden.3.gnu)):
 
 ```lisp
-(plottah:start)
-```
+(defun options ()
+ #m(title "Hidden line removal of explicit surfaces"
+    style "increment default"
+    view "70, 45, 1, 1"
+    samples "20, 20"
+    isosamples "20, 20"
+    hidden3d "back offset 1 trianglepattern 3 undefined 1 altdiagonal bentover"
+    style "data lines"
+    xrange "[ -3.00000 : 3.00000 ] noreverse nowriteback"
+    x2range "[ * : * ] noreverse writeback"
+    yrange "[ -3.00000 : 3.00000 ] noreverse nowriteback"
+    y2range "[ * : * ] noreverse writeback"
+    zrange "[ * : * ] noreverse writeback"
+    cbrange "[ * : * ] noreverse writeback"
+    rrange "[ * : * ] noreverse writeback"))
 
-This will run the `gnuplot` shell in an OS process.
+(defun eqn ()
+  "sin(x*x + y*y) / (x*x + y*y)")
+
+(plottah:splot (eqn) (options))
+```
 
 ## License [&#x219F;](#table-of-contents)
 
