@@ -1,6 +1,9 @@
 (defmodule fourier-approx
   (export all))
 
+;;; Original example:
+;;; * https://gnuplot.sourceforge.net/demo_5.2/bivariat.8.gnu
+
 (defun opts ()
  #m(title ""
  ))
