@@ -75,3 +75,24 @@ jobs:
       run: rebar3 as test lfe ltest -tall
     # - name: Test Coverage
     #   run: rebar3 as test do proper -c, cover -v --min_coverage=0
+
+  examples:
+    name: Examples w/Erlang ${{ matrix.otp_version }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        otp_version: ['24.3', '25.3', '26.0']
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: erlef/setup-beam@v1
+      with:
+        otp-version: ${{ matrix.otp_version }}
+        rebar3-version: '3.22'
+    - name: Install Deps
+      run: sudo apt-get update && sudo apt-get install -y gnuplot
+    - name: Compile
+      run: rebar3 compile && rebar3 as examples compile
+    - name: List Examples
+      run: rebar3 as examples list
