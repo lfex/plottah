@@ -6,7 +6,7 @@
    (stop 0))
   ;; callback implementation
   (export
-    (init 1)))
+   (init 1)))
 
 ;;; ----------------
 ;;; config functions

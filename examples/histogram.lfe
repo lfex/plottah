@@ -3,6 +3,7 @@
 
 ;;; Original example:
 ;;; * https://gnuplot.sourceforge.net/demo_5.2/histograms.2.gnu
+;;;
 (defun opts ()
   '(#(title "US immigration from Northern Europe\nPlot selected data columns as histogram of clustered boxes")
     #(style "fill solid 1.00 border lt -1")

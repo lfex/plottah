@@ -3,6 +3,7 @@
 
 ;;; Original example:
 ;;; * https://gnuplot.sourceforge.net/demo_5.2/hidden.3.gnu
+;;;
 (defun opts ()
   '(#(title "Hidden line removal of explicit surfaces")
     #(style "increment default")

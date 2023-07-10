@@ -33,7 +33,7 @@ This project depends upon:
 * `rebar3`
 * `gnuplot` being installed on the system
 
-Note that development was done against the gnuplot installed by Homebrew on macos.
+Note that development was done against the gnuplot installed by Homebrew (gnuplot 5.4 patchlevel 8) on macos (11.6).
 
 With the dependencies in place, the library may be compiled with the following:
 

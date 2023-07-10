@@ -3,7 +3,7 @@
 
 ;;; Original example:
 ;;; * https://gnuplot.sourceforge.net/demo_5.2/bivariat.8.gnu
-
+;;;
 (defun opts ()
   '(#(title "Finite summation of 10, 100, 1000 fourier coefficients")
     #(key "fixed right bottom vertical Right noreverse enhanced autotitle nobox")
