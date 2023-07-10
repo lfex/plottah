@@ -57,13 +57,14 @@
   ((`#(unset ,val))
    (unset-opt (atom_to_list val)))
   ((`#(,opt ,val))
+   (log-debug (io_lib:format "Raw val: ~p" `(,val)))
    (let ((args (plottah-cmd:join opt val)))
      (log-info (io_lib:format "Setting opt ~s" `(,args)))
-     (gen_server:call (SERVER) `#(cmd gplot ,(lists:flatten (plottah-cmd:join 'set args)))))))
+     (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'set args))))))
 
 (defun unset-opt (opt)
   (log-info (io_lib:format "Unsetting opt ~s" `(,opt)))
-  (gen_server:call (SERVER) `#(cmd gplot ,(lists:flatten (plottah-cmd:join 'unset opt)))))
+  (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'unset opt))))
 
 (defun set-vars
   (('())

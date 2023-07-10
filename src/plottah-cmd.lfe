@@ -1,13 +1,15 @@
 (defmodule plottah-cmd
   (export
-    (join 2)))
+   (join 2)))
 
 (defun dbl-quote () 34)
 (defun sngl-quote () 39)
 
 (defun join
   (('title args)
-   (join "title" (list (sngl-quote) args (sngl-quote))))
+   (if (not (io_lib:printable_unicode_list args))
+     (join 'title (string:join args "\\n"))
+     (join "title" (list (dbl-quote) args (dbl-quote)))))
   ((cmd args) (when (is_atom cmd))
    (join (atom_to_list cmd) args))
   ((`#(,opt offset) args)
@@ -17,5 +19,5 @@
   ((cmd args)
    (let ((args (lists:flatten args)))
      (if (io_lib:printable_unicode_list args)
-       (io_lib:format "~s ~s" `(,cmd ,args))
-       (io_lib:format "~s ~s" `(,cmd ,(string:join args " ")))))))
+       (++ cmd " " args)
+       (++ cmd " " (string:join args " "))))))
