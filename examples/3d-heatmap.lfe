@@ -4,7 +4,9 @@
 ;;; Original example:
 ;;; * https://gnuplot.sourceforge.net/demo_5.2/heatmaps.6.gnu
 (defun opts ()
-  '(#(title "4D data (3D Heat Map) Independent value color-mapped onto 3D surface")
+  '(#(title "4D data (3D Heat Map)\\\nIndependent value color-mapped onto 3D surface")
+    #(size "1, 0.9")
+    #(origin "0, 0.05")
     #(#(title offset) "character 0, 1, 0 font '' norotate")
     #(style "increment default")
     #(format "cb '%4.1f'")
@@ -12,9 +14,9 @@
     #(samples "25, 25")
     #(isosamples "50, 50")
     #(xyplane "relative 0")
-    #(cbtics "border in scale 0,0 mirror norotate  autojustify")
-    #(urange "[ 5.00000 : 35.0000 ] noreverse nowriteback")
-    #(vrange "[ 5.00000 : 35.0000 ] noreverse nowriteback")
+    #(cbtics "border in scale 0,0 mirror norotate autojustify")
+    #(urange "[ 5 : 35 ] noreverse nowriteback")
+    #(vrange "[ 5 : 35 ] noreverse nowriteback")
     #(xrange "[ * : * ] noreverse nowriteback")
     #(x2range "[ * : * ] noreverse nowriteback")
     #(yrange "[ * : * ] noreverse nowriteback")
@@ -38,4 +40,4 @@
     #("color(x,y)" "10. * (1.1 + sin((x-20.)/5.)*cos((y-20.)/10.))")))
 
 (defun splot-args ()
-  "'++' using 1:2:(Z($1,$2)):(color($1,$2)) with pm3d title '4 data columns x/y/z/color'")
+  "'++' using 1:2:(Z($1,$2)):(color($1,$2)) with pm3d title ''")
