@@ -4,7 +4,7 @@
 ;;; Original example:
 ;;; * https://gnuplot.sourceforge.net/demo_5.2/heatmaps.6.gnu
 (defun opts ()
-  '(#(title "4D data (3D Heat Map)\\\nIndependent value color-mapped onto 3D surface")
+  '(#(title "4D data (3D Heat Map)\\nIndependent value color-mapped onto 3D surface")
     #(size "1, 0.9")
     #(origin "0, 0.05")
     #(#(title offset) "character 0, 1, 0 font '' norotate")
