@@ -18,6 +18,13 @@
     {"GitHub", "https://github.com/lfex/plottah"},
     {"Hex", "https://hex.pm/packages/plottah"}
   ]},
-  {exclude_files, ["priv/html/*", "priv/images/*"]},
-  {include_files, ["examples/*", "scripts/*", "test/*"]}
+  {exclude_files, [
+    "priv/html/*",
+    "priv/images/*"
+  ]},
+  {include_files, [
+    "examples/*",
+    "scripts/*",
+    "test/*"
+  ]}
  ]}.
