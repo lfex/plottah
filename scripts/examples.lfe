@@ -7,6 +7,10 @@
     room-modes))
 
 (defun run-example
+ ((#"3d-heatmap")
+  (plottah:set-opts (3d-heatmap:opts))
+  (plottah:set-vars (3d-heatmap:vars))
+  (plottah:splot (3d-heatmap:splot-args)))
  ((#"3d-hidden")
   (plottah:splot (3d-hidden:eqn) (3d-hidden:opts)))
  ((#"histogram")
