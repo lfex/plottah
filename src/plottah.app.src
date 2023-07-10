@@ -1,6 +1,6 @@
 {application, plottah, [
   {description, "An Erlang/LFE gnuplot process server"},
-  {vsn, "0.2.0-dev"},
+  {vsn, "0.2.0"},
   {registered, []},
   {mod, {'plottah-app', []}},
   {applications, [
