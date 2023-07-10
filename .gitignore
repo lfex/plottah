@@ -19,6 +19,13 @@ _build/
 _checkouts/
 rebar.lock
 
+# emacs
+*~
+\#*\#
+.\#*
+.emacs.desktop
+.emacs.desktop.lock
+
 # misc
 /priv/images/drafts/*
 /doc/*
