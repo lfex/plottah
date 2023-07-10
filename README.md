@@ -84,26 +84,46 @@ First, be sure you've compiled the project using the instructions above!
 Then start the REPL (see above), including starting up `plottah`. You can then run code like the following in the REPL (example taken from [here](https://gnuplot.sourceforge.net/demo_5.2/hidden.3.gnu)):
 
 ```lisp
-(defun options ()
- #m(title "Hidden line removal of explicit surfaces"
-    style "increment default"
-    view "70, 45, 1, 1"
-    samples "20, 20"
-    isosamples "20, 20"
-    hidden3d "back offset 1 trianglepattern 3 undefined 1 altdiagonal bentover"
-    style "data lines"
-    xrange "[ -3.00000 : 3.00000 ] noreverse nowriteback"
-    x2range "[ * : * ] noreverse writeback"
-    yrange "[ -3.00000 : 3.00000 ] noreverse nowriteback"
-    y2range "[ * : * ] noreverse writeback"
-    zrange "[ * : * ] noreverse writeback"
-    cbrange "[ * : * ] noreverse writeback"
-    rrange "[ * : * ] noreverse writeback"))
+(defun opts ()
+  '(#(title "4D data (3D Heat Map)\\nIndependent value color-mapped onto 3D surface")
+    #(size "1, 0.9")
+    #(origin "0, 0.05")
+    #(#(title offset) "character 0, 1, 0 font '' norotate")
+    #(style "increment default")
+    #(format "cb '%4.1f'")
+    #(view "49, 28, 1, 1.48")
+    #(samples "25, 25")
+    #(isosamples "50, 50")
+    #(xyplane "relative 0")
+    #(cbtics "border in scale 0,0 mirror norotate autojustify")
+    #(urange "[ 5 : 35 ] noreverse nowriteback")
+    #(vrange "[ 5 : 35 ] noreverse nowriteback")
+    #(xrange "[ * : * ] noreverse nowriteback")
+    #(x2range "[ * : * ] noreverse nowriteback")
+    #(yrange "[ * : * ] noreverse nowriteback")
+    #(y2range "[ * : * ] noreverse nowriteback")
+    #(zrange "[ * : * ] noreverse nowriteback")
+    #(cbrange "[ * : * ] noreverse nowriteback")
+    #(rrange "[ * : * ] noreverse nowriteback")
+    #(pm3d "implicit at s")
+    #(colorbox "user")
+    #(colorbox "vertical origin screen 0.9, 0.2, 0 size screen 0.03, 0.6, 0 front noinvert noborder")
+    #(#(x label) "x")
+    #(#(xlabel offset) "character 3, 0, 0 font '' textcolor lt -1 norotate")
+    #(#(y label) "y")
+    #(#(ylabel offset) "character -5, 0, 0 font '' textcolor lt -1 rotate")
+    #(#(z label) "z")
+    #(#(zlabel offset) "character 2, 0, 0 font '' textcolor lt -1 norotate")))
 
-(defun eqn ()
-  "sin(x*x + y*y) / (x*x + y*y)")
+(defun funcs ()
+  '(#("sinc(x,y)" "sin(sqrt((x-20.)**2+(y-20.)**2))/sqrt((x-20.)**2+(y-20.)**2)")
+    #("Z(x,y)" "100. * (sinc(x,y) + 1.5)")
+    #("color(x,y)" "10. * (1.1 + sin((x-20.)/5.)*cos((y-20.)/10.))")))
 
-(plottah:splot (eqn) (options))
+(defun args ()
+  "'++' using 1:2:(Z($1,$2)):(color($1,$2)) with pm3d title ''")
+
+(plottah:splot (args) (options) (funcs))
 ```
 
 With that last, a window should pop up showing the following:
