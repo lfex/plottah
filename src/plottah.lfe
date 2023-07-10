@@ -8,6 +8,8 @@
     (plot 1) (plot 2)
     (set-opt 1)
     (set-opts 1)
+    (set-var 1)
+    (set-vars 1)
     (splot 1) (splot 2))
   ;; Debug
   (export
@@ -19,16 +21,17 @@
 
 (include-lib "logjam/include/logjam.hrl")
 
-;; Constants
+;;; Constants
 
 (defun APP () 'plottah)
 (defun SERVER () 'plottah-svr)
 
-;; Convenience wrappers
+;;; Convenience wrappers
+
 (defun start () (application:ensure_all_started (APP)))
 (defun stop () (application:stop (APP)))
 
-;; Plottah API
+;;; Plottah API
 
 (defun plot (args)
   (plot args #m()))
@@ -38,8 +41,6 @@
   (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'plot args))))
 
 (defun set-opts
- ((opts) (when (is_map opts))
-  (set-opts (maps:to_list opts)))
  (('())
   '())
  ((`(,opt . ,rest))
@@ -48,24 +49,36 @@
 
 (defun set-opt
   ((`#(unset ,val))
-    (unset-opt (atom_to_list val)))
+   (unset-opt (atom_to_list val)))
   ((`#(,opt ,val))
    (let ((args (plottah-cmd:join opt val)))
-     (log-debug (io_lib:format "Setting opt ~s" `(,args)))
+     (log-info (io_lib:format "Setting opt ~s" `(,args)))
      (gen_server:call (SERVER) `#(cmd gplot ,(lists:flatten (plottah-cmd:join 'set args)))))))
 
 (defun unset-opt (opt)
-  (log-debug (io_lib:format "Unsetting opt ~s" `(,opt)))
+  (log-info (io_lib:format "Unsetting opt ~s" `(,opt)))
   (gen_server:call (SERVER) `#(cmd gplot ,(lists:flatten (plottah-cmd:join 'unset opt)))))
 
+(defun set-vars
+ (('())
+  '())
+ ((`(,lhs-rhs . ,rest))
+  (set-var lhs-rhs)
+  (set-vars rest)))
+
+(defun set-var
+ ((`#(,lhs ,rhs))
+  (log-info (io_lib:format "Defining '~s' as '~s'" (list lhs rhs)))
+  (gen_server:call (SERVER) `#(cmd gplot ,(io_lib:format "~s = ~s" (list lhs rhs))))))
+
 (defun splot (args)
-  (splot args #m()))
+  (splot args '()))
 
 (defun splot (args opts)
   (set-opts opts)
   (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'splot args))))
 
-;; Debug
+;;; Debug
 
 (defun echo (msg)
   (gen_server:call (SERVER) `#(cmd echo ,msg)))
