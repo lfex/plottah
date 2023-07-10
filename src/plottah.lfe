@@ -25,6 +25,7 @@
 
 (defun APP () 'plottah)
 (defun SERVER () 'plottah-svr)
+(defun default-ms-delay () 100)
 
 ;;; Convenience wrappers
 
@@ -49,7 +50,8 @@
    '())
   ((`(,opt . ,rest))
    (set-opt opt)
-   (set-opts rest)))
+   (set-opts rest)
+   (default-ms-delay)))
 
 (defun set-opt
   ((`#(unset ,val))
@@ -68,12 +70,15 @@
    '())
   ((`(,lhs-rhs . ,rest))
    (set-var lhs-rhs)
-   (set-vars rest)))
+   (set-vars rest)
+   (default-ms-delay)))
 
 (defun set-var
   ((`#(,lhs ,rhs))
    (log-info (io_lib:format "Defining '~s' as '~s'" (list lhs rhs)))
-   (gen_server:call (SERVER) `#(cmd gplot ,(io_lib:format "~s = ~s" (list lhs rhs))))))
+   (let ((cmd (io_lib:format "~s = ~s" (list lhs rhs)))
+         (ms-delay 500))
+     (gen_server:call (SERVER) `#(cmd gplot ,cmd delay ,ms-delay)))))
 
 (defun splot (args)
   (splot args '()))

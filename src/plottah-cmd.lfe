@@ -7,7 +7,7 @@
 
 (defun join
   (('title args)
-   (join "title" (list (dbl-quote) args (dbl-quote))))
+   (join "title" (list (sngl-quote) args (sngl-quote))))
   ((cmd args) (when (is_atom cmd))
    (join (atom_to_list cmd) args))
   ((`#(,opt offset) args)

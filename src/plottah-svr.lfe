@@ -48,26 +48,29 @@
 
 (defun handle_cast
   ((msg state)
-    (unknown-command msg)
-    `#(noreply ,state)))
+   (unknown-command msg)
+   `#(noreply ,state)))
 
 (defun handle_call
   (('stop _from state)
-    `#(stop shutdown ok ,state))
+   `#(stop shutdown ok ,state))
   ((`#(cmd echo ,msg) _from state)
-    `#(reply ,msg ,state))
+   `#(reply ,msg ,state))
   ((`#(cmd ping) _from state)
-    `#(reply pong ,state))
+   `#(reply pong ,state))
   ((`#(cmd state) _from state)
-    `#(reply ,state ,state))
-  ((`#(cmd gplot ,cmd) _from (= `#m(os-pid ,os-pid) state))
+   `#(reply ,state ,state))
+  ((`#(cmd gplot ,cmd) from state)
+   (handle_call `#(cmd gplot ,cmd delay 0) from state))
+  ((`#(cmd gplot ,cmd delay ,ms-delay) _from (= `#m(os-pid ,os-pid) state))
    (log-debug "Sending command: ~s" (list cmd))
-    (let ((output (exec:send os-pid (list_to_binary (++ cmd "\n")))))
-      ; (log-debug (string:substr output 0 1000))
-      )
-    `#(reply ok ,state))
+   (let ((output (exec:send os-pid (list_to_binary (++ cmd "\n")))))
+     ;; (log-debug (string:substr output 0 1000))
+     ;; for some operations, erlexec needs to give gnuplot a little time to catch up:
+     (timer:sleep ms-delay))
+   `#(reply ok ,state))
   ((msg _from state)
-    `#(reply ,(unknown-command msg) ,state)))
+   `#(reply ,(unknown-command msg) ,state)))
 
 (defun handle_info
   ;; Output from gnuplot
