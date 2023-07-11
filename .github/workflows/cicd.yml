@@ -97,6 +97,10 @@ jobs:
       run: rebar3 compile && rebar3 as examples compile
     - name: List Examples
       run: rebar3 as examples list
+    - name: Which gnuplot
+      run: which gnuplot
+    - name: gnuplot Version
+      run: gnuplot --version
     - name: Run One
       run: rebar3 as examples lfe run -- 3d-heatmap true
     - name: Run All
