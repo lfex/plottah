@@ -11,3 +11,10 @@ hex-publish:
 	cp priv/html/docs-redirect.html doc/index.html
 	rebar3 hex publish
 	rm -rf doc
+
+md5sum:
+	md5sum priv/output/*.jpg |sort
+
+output-md5sum:
+	@echo "\nGenerating check sums ...\n"
+	$(MAKE) md5sum > examples/output.md5sum

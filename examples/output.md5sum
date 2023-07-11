@@ -1,0 +1,9 @@
+md5sum priv/output/*.jpg |sort
+131482f43b8edf18e0134c549c3cba7f  priv/output/controls.jpg
+789d1ed752f234961589154569e8c811  priv/output/3d-hidden.jpg
+9e30990129371a077866ddeeca7949da  priv/output/room-modes.jpg
+a0551bb427841b38380f27f7c03daaa6  priv/output/helix.jpg
+a1fcbd6325abf025e38adfb41c5238ae  priv/output/histogram.jpg
+a32fc40569e3790633174ddba9e81b48  priv/output/tori.jpg
+c976341f97564d5853680e99a10b5cd0  priv/output/3d-heatmap.jpg
+f7ecbe1751e957b417b682549175634a  priv/output/fourier-approx.jpg
