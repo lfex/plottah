@@ -96,3 +96,7 @@ jobs:
       run: rebar3 compile && rebar3 as examples compile
     - name: List Examples
       run: rebar3 as examples list
+    - name: Run One
+      run: rebar3 as examples lfe run -- 3d-heatmap true
+    - name: Run All
+      run: rebar3 as examples lfe run -- all true

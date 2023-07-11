@@ -29,3 +29,4 @@ rebar.lock
 # misc
 /priv/images/drafts/*
 /doc/*
+/priv/output/*

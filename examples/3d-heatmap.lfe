@@ -35,7 +35,7 @@
     #(#(z label) "z")
     #(#(zlabel offset) "character 2, 0, 0 font '' textcolor lt -1 norotate")))
 
-(defun vars ()
+(defun funcs ()
   '(#("sinc(x,y)" "sin(sqrt((x-20.)**2+(y-20.)**2))/sqrt((x-20.)**2+(y-20.)**2)")
     #("Z(x,y)" "100. * (sinc(x,y) + 1.5)")
     #("color(x,y)" "10. * (1.1 + sin((x-20.)/5.)*cos((y-20.)/10.))")))
