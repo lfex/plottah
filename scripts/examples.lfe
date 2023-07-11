@@ -1,8 +1,9 @@
-infescript
+#! /usr/bin/env lfescript
 
 (defun list-examples ()
   '(3d-heatmap
     3d-hidden
+    controls
     fourier-approx
     histogram
     room-modes))
@@ -26,6 +27,12 @@ infescript
                   to-file?
                   (3d-hidden:eqn)
                   (3d-hidden:opts)))
+  (((= #"controls" name) `(,to-file? . ,_))
+   (plot-example name
+                 to-file?
+                 (controls:plot)
+                 (controls:opts)
+                 (controls:funcs-and-vars)))
   (((= #"fourier-approx" name) `(,to-file? . ,_))
    (plot-example name
                  to-file?
@@ -44,6 +51,18 @@ infescript
                  to-file?
                  (room-modes:plot)
                  (room-modes:opts))))
+
+(defun main
+  (('())
+   (lfe_io:format "~p~n" (list (list-examples))))
+  ((`(,name . ,args))
+   (plottah:start)
+   (timer:sleep 500)
+   (run-example name args)
+   (timer:sleep 1000)
+   (plottah:stop)))
+
+;;; Private functions
 
 (defun to-file-opts (opts name)
   (lists:append opts
@@ -68,13 +87,3 @@ infescript
 (defun splot-example (name to-file? args opts vars)
   (let ((opts (update-opts opts name to-file?)))
     (plottah:splot args opts vars)))
-
-(defun main
-  (('())
-   (lfe_io:format "~p~n" (list (list-examples))))
-  ((`(,name . ,args))
-   (plottah:start)
-   (timer:sleep 500)
-   (run-example name args)
-   (timer:sleep 1000)
-   (plottah:stop)))

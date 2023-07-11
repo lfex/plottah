@@ -26,6 +26,9 @@ rebar.lock
 .emacs.desktop
 .emacs.desktop.lock
 
+# apple
+.DS_Store
+
 # misc
 /priv/images/drafts/*
 /doc/*
