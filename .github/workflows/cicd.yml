@@ -81,31 +81,32 @@ jobs:
     runs-on: ubuntu-latest
     needs: [core-builds,older-builds]
 
+    container: erlang:${{ matrix.otp_version }}
+    
     strategy:
       matrix:
         otp_version: ['24.3', '25.3', '26.0']
 
     steps:
     - uses: actions/checkout@v2
-    - uses: erlef/setup-beam@v1
-      with:
-        otp-version: ${{ matrix.otp_version }}
-        rebar3-version: '3.22'
     - name: Install Deps
-      run: sudo apt-get update && sudo apt-get install -y gnuplot
+      run: apt-get update && apt-get install -y gnuplot sudo
+    - name: Setup System User
+      run: useradd -m examplesuser && chown -R examplesuser:examplesuser .
     - name: Compile
-      run: rebar3 compile && rebar3 as examples compile
+      run: |
+        sudo -u examplesuser rebar3 compile
+        sudo -u examplesuser rebar3 as examples compile
     - name: List Examples
-      run: rebar3 as examples list
+      run: |
+        sudo -u examplesuser rebar3 as examples list
     - name: Which gnuplot
       run: which gnuplot
     - name: gnuplot Version
       run: gnuplot --version
-    - name: Whoami
-      run: whoami
-    - name: Set Perms
-      run: _build/examples/lib/erlexec/priv/*/exec-port --whoami
-    - name: Run One
-      run: rebar3 as examples lfe run -- 3d-heatmap true
-    - name: Run All
-      run: rebar3 as examples lfe run -- all true
+    - name: Run One Example
+      run: |
+        sudo -u examplesuser rebar3 as examples lfe run -- 3d-heatmap true
+    - name: Run All Examples
+      run: |
+        sudo -u examplesuser rebar3 as examples lfe run -- all true
