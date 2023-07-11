@@ -13,7 +13,7 @@
 
 (defun run-example
   ((name '())
-   (run-example name #"false"))
+   (run-example name '(#"false")))
   ((#"all"  `(,to-file? . ,_))
    (lists:map
     (lambda (name)
