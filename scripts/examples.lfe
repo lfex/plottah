@@ -7,6 +7,7 @@
     fourier-approx
     helix
     histogram
+    moebius
     room-modes
     tori))
 
@@ -64,7 +65,13 @@
                   to-file?
                   (tori:splot-args)
                   (tori:opts)
-                  (tori:vars))))
+                  (tori:vars)))
+  (((= #"moebius" name) `(,to-file? . ,_))
+   (splot-example name
+                  to-file?
+                  (moebius:splot-args)
+                  (moebius:opts)
+                  (moebius:vars))))
 
 (defun main
   (('())

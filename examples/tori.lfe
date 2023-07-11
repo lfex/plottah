@@ -5,7 +5,7 @@
 ;;; * https://gnuplot.sourceforge.net/demo_5.4/surface2.9.gnu
 ;;;
 (defun opts ()
-  '(#(title ("Interlocking Tori"))
+  '(#(title "Interlocking Tori")
     #(dummy "u, v")
     #(key "bmargin center horizontal Right noreverse enhanced autotitle nobox")
     #(parametric "")

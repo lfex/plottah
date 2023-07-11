@@ -1,20 +1,21 @@
-(defmodule helix
+(defmodule moebius
   (export all))
 
 ;;; Original example:
-;;; * https://gnuplot.sourceforge.net/demo_5.4/surface2.6.gnu
+;;; * https://gnuplot.sourceforge.net/demo_5.4/singulr.16.gnu
 ;;;
 (defun opts ()
-  '(#(title "Parametric Helix")
+  '(#(title "Moebius strip (view from opposite side)")
+    #(size "1, 1.1")
     #(dummy "u, v")
+    #(style "increment default")
     #(key "bmargin center horizontal Right noreverse enhanced autotitle nobox")
     #(parametric "")
-    #(view "45 50 1 1")
-    #(isosamples "100, 20")
+    #(view "60, 210, 1, 1")
+    #(isosamples "24, 12")
     #(style "data lines")
-    #(hidden3d "back offset 1 trianglepattern 3 undefined 1 altdiagonal bentover")
-    #(urange "[ 0 : 31.4159 ] noreverse writeback")
-    #(vrange "[ 0 : 6.28319 ] noreverse writeback")
+    #(urange "[ 0 : 6.28319 noreverse writeback")
+    #(vrange "[ -0.25 : 0.25 ] noreverse writeback")
     #(xrange "[ * : * ] noreverse writeback")
     #(x2range "[ * : * ] noreverse writeback")
     #(yrange "[ * : * ] noreverse writeback")
@@ -22,10 +23,11 @@
     #(zrange "[ * : * ] noreverse writeback")
     #(cbrange "[ * : * ] noreverse writeback")
     #(rrange "[ * : * ] noreverse writeback")
-    #(colorbox "vertical origin screen 0.9, 0.2 size screen 0.05, 0.6 front  noinvert bdefault")))
+    #(pm3d "implicit at s ftriangles corners2color max")
+    #(colorbox "vertical origin screen 0.9, 0.2 size screen 0.05, 0.6 front noinvert bdefault")))
 
 (defun vars ()
   '(#("NO_ANIMATION" "1")))
 
 (defun splot-args ()
-  "(1-0.1*cos(v))*cos(u),(1-0.1*cos(v))*sin(u),0.1*(sin(v)+u/1.7-10)")
+  "(2-v*sin(u/2))*sin(u),(2-v*sin(u/2))*cos(u),v*cos(u/2) lt rgb '#333333'")
