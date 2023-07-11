@@ -79,6 +79,7 @@ jobs:
   examples:
     name: Examples w/Erlang ${{ matrix.otp_version }}
     runs-on: ubuntu-latest
+    needs: [core-builds,older-builds]
 
     strategy:
       matrix:
