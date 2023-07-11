@@ -7,7 +7,8 @@
     fourier-approx
     helix
     histogram
-    room-modes))
+    room-modes
+    tori))
 
 (defun run-example
   ((name '())
@@ -57,7 +58,13 @@
    (plot-example name
                  to-file?
                  (room-modes:plot-args)
-                 (room-modes:opts))))
+                 (room-modes:opts)))
+  (((= #"tori" name) `(,to-file? . ,_))
+   (splot-example name
+                  to-file?
+                  (tori:splot-args)
+                  (tori:opts)
+                  (tori:vars))))
 
 (defun main
   (('())

@@ -1,20 +1,21 @@
-(defmodule helix
+(defmodule tori
   (export all))
 
 ;;; Original example:
-;;; * https://gnuplot.sourceforge.net/demo_5.4/surface2.6.gnu
+;;; * https://gnuplot.sourceforge.net/demo_5.4/surface2.9.gnu
 ;;;
 (defun opts ()
-  '(#(title ("Parametric Helix"))
+  '(#(title ("Interlocking Tori"))
     #(dummy "u, v")
     #(key "bmargin center horizontal Right noreverse enhanced autotitle nobox")
     #(parametric "")
-    #(view "45 50 1 1")
-    #(isosamples "100, 20")
+    #(view "50, 30, 1, 1")
+    #(isosamples "50, 20")
     #(style "data lines")
+    #(xyplane "relative 0")
     #(hidden3d "back offset 1 trianglepattern 3 undefined 1 altdiagonal bentover")
-    #(urange "[ 0 : 31.4159 ] noreverse writeback")
-    #(vrange "[ 0 : 6.28319 ] noreverse writeback")
+    #(urange "[ -3.14159 : 3.14159 ] noreverse writeback")
+    #(vrange "[ -3.14159 : 3.14159 ] noreverse writeback")
     #(xrange "[ * : * ] noreverse writeback")
     #(x2range "[ * : * ] noreverse writeback")
     #(yrange "[ * : * ] noreverse writeback")
@@ -28,4 +29,4 @@
   '(#("NO_ANIMATION" "1")))
 
 (defun splot-args ()
-  "(1-0.1*cos(v))*cos(u),(1-0.1*cos(v))*sin(u),0.1*(sin(v)+u/1.7-10)")
+  "cos(u)+.5*cos(u)*cos(v),sin(u)+.5*sin(u)*cos(v),.5*sin(v) with lines,       1+cos(u)+.5*cos(u)*cos(v),.5*sin(v),sin(u)+.5*sin(u)*cos(v) with lines")
