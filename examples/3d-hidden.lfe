@@ -20,5 +20,5 @@
     #(cbrange "[ * : * ] noreverse writeback")
     #(rrange "[ * : * ] noreverse writeback")))
 
-(defun eqn ()
+(defun splot-args ()
   "sin(x*x + y*y) / (x*x + y*y)")

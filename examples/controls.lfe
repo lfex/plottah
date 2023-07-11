@@ -28,5 +28,5 @@
     #("s" "2.0")
     #("wn" "1.0")))
 
-(defun plot ()
+(defun plot-args ()
   "s=.1,c(t),s=.3,c(t),s=.5,c(t),s=.7,c(t),s=.9,c(t),s=1.0,c(t),s=1.5,c(t),s=2.0,c(t)")

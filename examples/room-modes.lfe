@@ -23,5 +23,5 @@
     #(grid "")
     #(key "on outside")))
 
-(defun plot ()
+(defun plot-args ()
   "'examples/room-modes.csv' u 2:1 title 'Length' w boxes lc rgb 'blue', '' u 3:1 title 'Width' w boxes lc rgb 'green', '' u 4:1 title 'Height' w boxes lc rgb 'red'")

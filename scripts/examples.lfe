@@ -5,6 +5,7 @@
     3d-hidden
     controls
     fourier-approx
+    helix
     histogram
     room-modes))
 
@@ -25,12 +26,12 @@
   (((= #"3d-hidden" name) `(,to-file? . ,_))
    (splot-example name
                   to-file?
-                  (3d-hidden:eqn)
+                  (3d-hidden:splot-args)
                   (3d-hidden:opts)))
   (((= #"controls" name) `(,to-file? . ,_))
    (plot-example name
                  to-file?
-                 (controls:plot)
+                 (controls:plot-args)
                  (controls:opts)
                  (controls:funcs-and-vars)))
   (((= #"fourier-approx" name) `(,to-file? . ,_))
@@ -41,15 +42,21 @@
                  (fourier-approx:funcs-and-vars))
    ;; This one's complex, so it needs a bit more time to render
    (timer:sleep 1000))
+  (((= #"helix" name) `(,to-file? . ,_))
+   (splot-example name
+                  to-file?
+                  (helix:splot-args)
+                  (helix:opts)
+                  (helix:vars)))
   (((= #"histogram" name) `(,to-file? . ,_))
    (plot-example name
                  to-file?
-                 (histogram:plot)
+                 (histogram:plot-args)
                  (histogram:opts)))
   (((= #"room-modes" name) `(,to-file? . ,_))
    (plot-example name
                  to-file?
-                 (room-modes:plot)
+                 (room-modes:plot-args)
                  (room-modes:opts))))
 
 (defun main

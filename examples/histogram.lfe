@@ -24,5 +24,5 @@
     #(cbrange "[ * : * ] noreverse writeback")
     #(rrange "[ * : * ] noreverse writeback")))
 
-(defun plot ()
+(defun plot-args ()
   "'examples/immigration.dat' using 6:xtic(1) ti col, '' u 12 ti col, '' u 13 ti col, '' u 14 ti col")
