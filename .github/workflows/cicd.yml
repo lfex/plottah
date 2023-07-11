@@ -101,6 +101,10 @@ jobs:
       run: which gnuplot
     - name: gnuplot Version
       run: gnuplot --version
+    - name: Whoami
+      run: whoami
+    - name: Set Perms
+      run: _build/examples/lib/erlexec/priv/*/exec-port --whoami
     - name: Run One
       run: rebar3 as examples lfe run -- 3d-heatmap true
     - name: Run All

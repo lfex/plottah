@@ -74,6 +74,10 @@
 
 (defun handle_info
   ;; Output from gnuplot
+  ((`#(stdout ,_pid ,msg) state)
+   (io:format "~s~n" (list (string:substr (binary_to_list msg) 1 1000)))
+   `#(noreply ,state))
+  ;; Output from gnuplot
   ((`#(stderr ,_pid ,msg) state)
    (io:format "~s~n" (list (string:substr (binary_to_list msg) 1 1000)))
    `#(noreply ,state))
