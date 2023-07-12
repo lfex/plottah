@@ -104,15 +104,17 @@ jobs:
       run: which gnuplot
     - name: gnuplot Version
       run: gnuplot --version
-    - name: Run One Example
-      run: |
-        sudo -u examplesuser rebar3 as examples lfe run -- 3d-heatmap true
-    - name: Run All Examples
+    - name: Run the Examples
       run: |
         sudo -u examplesuser rebar3 as examples lfe run -- all true
+        sudo -u examplesuser rebar3 as examples lfe run -- fourier-approx true
     - name: List Generated Images
       run: ls -l priv/output/*.jpg
+    - name: Show Expected md5sums
+      run: cat examples/output.md5sum
     - name: Make md5sum
       run: make md5sum > priv/output/examples.md5sum
+    - name: Show Generated md5sums
+      run: cat priv/output/examples.md5sum
     - name: Check md5sums
-      run: diff -u examples/output.md5sum priv/output/examples.md5sum
+      run: diff -EBbiw --suppress-common-lines examples/output.md5sum priv/output/examples.md5sum

@@ -13,11 +13,11 @@ hex-publish:
 	rm -rf doc
 
 md5sum:
-	md5sum priv/output/*.jpg |sort
+	@md5sum priv/output/*.jpg |grep -v md5sum|sort
 
 output-md5sum:
 	@echo "\nGenerating check sums ...\n"
-	$(MAKE) md5sum > examples/output.md5sum
+	@$(MAKE) md5sum | grep priv > examples/output.md5sum
 
 docker-image:
 	docker build -t lfex:plottah .

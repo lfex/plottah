@@ -26,6 +26,7 @@
 (defun APP () 'plottah)
 (defun SERVER () 'plottah-svr)
 (defun default-ms-delay () 100)
+(defun default-ms-long-delay () 1000)
 
 ;;; Convenience wrappers
 
@@ -43,7 +44,8 @@
 (defun plot (args opts vars)
   (set-opts opts)
   (set-vars vars)
-  (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'plot args))))
+  (gen_server:call (SERVER)
+                   `#(cmd gplot ,(plottah-cmd:join 'plot args) delay ,(default-ms-delay))))
 
 (defun set-opts
   (('())
@@ -51,7 +53,7 @@
   ((`(,opt . ,rest))
    (set-opt opt)
    (set-opts rest)
-   (default-ms-delay)))
+   (default-ms-long-delay)))
 
 (defun set-opt
   ((`#(unset ,val))
@@ -60,11 +62,13 @@
    (log-debug (io_lib:format "Raw val: ~p" `(,val)))
    (let ((args (plottah-cmd:join opt val)))
      (log-info (io_lib:format "Setting opt ~s" `(,args)))
-     (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'set args))))))
+     (gen_server:call (SERVER)
+                      `#(cmd gplot ,(plottah-cmd:join 'set args) delay ,(default-ms-delay))))))
 
 (defun unset-opt (opt)
   (log-info (io_lib:format "Unsetting opt ~s" `(,opt)))
-  (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'unset opt))))
+  (gen_server:call (SERVER)
+                   `#(cmd gplot ,(plottah-cmd:join 'unset opt) delay ,(default-ms-delay))))
 
 (defun set-vars
   (('())
@@ -72,14 +76,14 @@
   ((`(,lhs-rhs . ,rest))
    (set-var lhs-rhs)
    (set-vars rest)
-   (default-ms-delay)))
+   (default-ms-long-delay)))
 
 (defun set-var
   ((`#(,lhs ,rhs))
    (log-info (io_lib:format "Defining '~s' as '~s'" (list lhs rhs)))
-   (let ((cmd (io_lib:format "~s = ~s" (list lhs rhs)))
-         (ms-delay 500))
-     (gen_server:call (SERVER) `#(cmd gplot ,cmd delay ,ms-delay)))))
+   (let ((cmd (io_lib:format "~s = ~s" (list lhs rhs))))
+     (gen_server:call (SERVER)
+                      `#(cmd gplot ,cmd delay ,(default-ms-long-delay))))))
 
 (defun splot (args)
   (splot args '()))
@@ -90,7 +94,8 @@
 (defun splot (args opts vars)
   (set-opts opts)
   (set-vars vars)
-  (gen_server:call (SERVER) `#(cmd gplot ,(plottah-cmd:join 'splot args))))
+  (gen_server:call (SERVER)
+                   `#(cmd gplot ,(plottah-cmd:join 'splot args) delay ,(default-ms-delay))))
 
 ;;; Debug
 

@@ -1,5 +1,3 @@
-make[1]: Entering directory '/plottah'
-md5sum priv/output/*.jpg |sort
 05817f694609b5acf0efdab75ed5ca47  priv/output/3d-hidden.jpg
 2cf50cae6d060618fc9854c1bda66d3a  priv/output/controls.jpg
 3b8e297bc4d2b4f02a592b953fb44f1a  priv/output/fourier-approx.jpg
@@ -9,4 +7,4 @@ d48f626738a5f4ec8f1617835ab4cc5b  priv/output/3d-heatmap.jpg
 d9d8fc1f06bc37c0575636ce4b7984f7  priv/output/tori.jpg
 e7308d41f0d889a09a4c0fb1ad43210d  priv/output/helix.jpg
 fc31bfa3e9ff692871b718fabca8bedd  priv/output/histogram.jpg
-make[1]: Leaving directory '/plottah'
+
