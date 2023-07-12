@@ -18,3 +18,9 @@ md5sum:
 output-md5sum:
 	@echo "\nGenerating check sums ...\n"
 	$(MAKE) md5sum > examples/output.md5sum
+
+docker-image:
+	docker build -t lfex:plottah .
+
+docker-md5sum: docker-image
+	docker run -it -v `pwd`/examples:/plottah/examples lfex:plottah

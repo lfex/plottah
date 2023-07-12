@@ -1,9 +1,12 @@
+make[1]: Entering directory '/plottah'
 md5sum priv/output/*.jpg |sort
-131482f43b8edf18e0134c549c3cba7f  priv/output/controls.jpg
-789d1ed752f234961589154569e8c811  priv/output/3d-hidden.jpg
-9e30990129371a077866ddeeca7949da  priv/output/room-modes.jpg
-a0551bb427841b38380f27f7c03daaa6  priv/output/helix.jpg
-a1fcbd6325abf025e38adfb41c5238ae  priv/output/histogram.jpg
-a32fc40569e3790633174ddba9e81b48  priv/output/tori.jpg
-c976341f97564d5853680e99a10b5cd0  priv/output/3d-heatmap.jpg
-f7ecbe1751e957b417b682549175634a  priv/output/fourier-approx.jpg
+05817f694609b5acf0efdab75ed5ca47  priv/output/3d-hidden.jpg
+2cf50cae6d060618fc9854c1bda66d3a  priv/output/controls.jpg
+3b8e297bc4d2b4f02a592b953fb44f1a  priv/output/fourier-approx.jpg
+aa8907f4f19d2d5cd2051a9ee98fe27a  priv/output/room-modes.jpg
+c6a7b8d0f75a1669e3aa797f47ccc0de  priv/output/moebius.jpg
+d48f626738a5f4ec8f1617835ab4cc5b  priv/output/3d-heatmap.jpg
+d9d8fc1f06bc37c0575636ce4b7984f7  priv/output/tori.jpg
+e7308d41f0d889a09a4c0fb1ad43210d  priv/output/helix.jpg
+fc31bfa3e9ff692871b718fabca8bedd  priv/output/histogram.jpg
+make[1]: Leaving directory '/plottah'
