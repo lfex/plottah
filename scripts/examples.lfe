@@ -43,7 +43,7 @@
                  (fourier-approx:opts)
                  (fourier-approx:funcs-and-vars))
    ;; This one's complex, so it needs a bit more time to render
-   (timer:sleep 2000))
+   (timer:sleep 4000))
   (((= #"helix" name) `(,to-file? . ,_))
    (splot-example name
                   to-file?
